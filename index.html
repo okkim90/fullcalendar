@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./assets/css/common.min.css">
+</head>
+<body>
+    <div id="wrap">
+        <header id="header"></header>
+        <div class="inner">
+            <div class="calendar_wrap">
+                <div id="calendar"></div>
+                <div class="calendar_cont"></div>
+            </div>
+        </div>
+       
+    </div>
+
+    <script src="./assets/js/index.global.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                locale: 'kr',
+                events: './events.json',
+                dayMaxEventRows: true,
+                views: {
+                    dayGrid: {
+                        dayMaxEventRows: 0 // adjust to 6 only for timeGridWeek/timeGridDay
+                    }
+                },
+                dateClick: function(info) {
+                    console.log('Clicked on: ' + info.dateStr);
+                    //console.log('Coordinates: ' + info.jsEvent.pageX + ',' + info.jsEvent.pageY);
+                    
+                    console.log(info.dayEl);
+                    //alert('Current view: ' + info.view.type);
+                    // change the day's background color just for fun
+                    //info.dayEl.style.backgroundColor = 'red';
+                },
+
+            });
+            calendar.render()
+        });
+    </script>
+</body>
+</html>
